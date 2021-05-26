@@ -45,7 +45,7 @@ pipeline {
 			steps {
 				// "docker Build -t bapdala/currency-exchange-microservice:$env.BUILD_TAG"
 				script{
-					dockerImage = docker.Build("bapdala/currency-exchange-microservice:${env.BUILD_TAG}")
+					dockerImage = docker.Build("bpadala/currency-exchange-microservice:${env.BUILD_TAG}")
 				}
 			}
 		}
