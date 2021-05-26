@@ -44,11 +44,11 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 				// "docker Build -t bapdala/currency-exchange-microservice:$env.BUILD_TAG"
-				script{
+				script {
 					dockerImage = docker.build("bpadala/currency-exchange-microservice:${env.BUILD_TAG}")
 				}
 			}
-		}
+		}	
 		stage('Docker Image push') {
 			steps{
 				script{
