@@ -36,6 +36,32 @@ pipeline {
 			//echo "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
+		stage('Package') {
+			steps {
+			 sh "mvn package -DskipTests"
+			}
+		}
+		stage('Build Docker Image') {
+			steps {
+				// "docker Build -t bapdala/currency-exchange-microservice:$env.BUILD_TAG"
+				script{
+					dockerImage = docker.Build("bapdala/currency-exchange-microservice:${env.BUILD_TAG}")
+				}
+			}
+		}
+		stage('Docker Image push') {
+			steps{
+				script{
+					docker.withRegistry('',dockerhub){
+						dockerImage.push();
+						dockerImage.push('latest');
+				}
+			}
+		}
+			
+		}
+
+
 	} 
 	
 	post {
